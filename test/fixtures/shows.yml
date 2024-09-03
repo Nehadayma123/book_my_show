@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  show_time: 2024-09-03 15:39:45
+  available_seates: 1
+  movie: one
+  theatre: one
+
+two:
+  show_time: 2024-09-03 15:39:45
+  available_seates: 1
+  movie: two
+  theatre: two
