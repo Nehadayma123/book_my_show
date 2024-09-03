@@ -1,0 +1,29 @@
+
+.form-design{
+    margin: 10px;
+    padding: 10px;
+  } 
+  input[type="text"]{
+    width: 30vh;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .form{
+    border: solid black 2px;
+    height: 30vh;
+    width: 50vh;
+  }
+  
+  input[type="submit"]{
+    margin-left: 190px;
+    padding: 10px;
+    color: black;
+    border-radius: 5px;
+    background: #F08080;
+    border: none;
+  }
+ 
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
