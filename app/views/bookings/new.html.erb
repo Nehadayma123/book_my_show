@@ -1,0 +1,7 @@
+<%= stylesheet_link_tag "new_theatre"%>
+
+<h1 style= "margin-bottom: 15px">Booking</h1>
+<%= render "form", booking: @booking %>
+<div>
+  <%= link_to "Back to booking", bookings_path, class: 'btn btn-primary' %>
+</div>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   def admin?
     admin
   end
+  has_many :bookings
      
    validates :email, presence: true
    validates :email, uniqueness: true

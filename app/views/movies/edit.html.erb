@@ -1,0 +1,16 @@
+<%= stylesheet_link_tag "edit_theatre"%>
+
+<h1  style= "margin-bottom: 15px">Editing Movie</h1>
+
+<%= render "form", movie: @movie %>
+
+<br>
+
+<div class = "first">
+  
+  <%=  link_to "Show this movie", @movie, class: 'btn btn-primary' %> 
+  </div>
+  <div class = "second">
+  <%=  link_to "Back to movie", movie_path, class: 'btn btn-primary'%>
+</div>
+
