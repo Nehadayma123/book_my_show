@@ -1,7 +1,7 @@
 class Show < ApplicationRecord
   belongs_to :movie
   belongs_to :theatre
-  
+  has_many :booking
   validates :show_time, presence: true
   # validates :show_time, comparison: { greater_than: :Time.now }
   validate :show_time_for_movie

@@ -1,0 +1,15 @@
+<%= stylesheet_link_tag "theatre_form"%>
+
+ <div class = form>
+  <%= form_with model: @movie do |form| %>
+  <div class = "form-design">
+  <%= form.label :title, "Title:" %>
+  <%= form.text_field :title %>
+  </div>
+  <div class="form-design">
+  <%= form.label :description, "Description:" %>
+  <%= form.text_field :description %>
+  </div>
+   <div><%= form.submit "Submit"%></div>
+<% end %>
+</div>
