@@ -1,0 +1,32 @@
+
+<%= stylesheet_link_tag "header"%>
+
+  <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                 <%= image_tag("logo.png", {:style => "width:150px;height: 60px;"}) %>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#footer">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <form action="#" method="get">
+                    <input type="text" placeholder="Search for movies...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+             <div class = "image">
+                  <div>
+                 <%= image_tag("user_logo.png", {:style => "width:50px;"}) %>
+                  </div>
+                  <div>Hi,Admin</div>
+
+            </div>
+
+        </div>
+    </header>

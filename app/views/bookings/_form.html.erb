@@ -4,8 +4,8 @@
 <% @theatres = Theatre.all %>
  <div class = "form-design">
     <% @theatres.each do |theatre| %>
-     Name: <%= form.radio_button :theatre, "#{theatre.name}, #{theatre.location}" %>
-             <%= form.label :theatre, "#{theatre.name}, #{theatre.location}" %>
+     
+   Name: <%= "#{theatre.name}, #{theatre.location}" %>
       <br>
     <% @shows = theatre.shows%>
     <% @shows.each do |show| %>
@@ -15,30 +15,6 @@
     <% end %>
     <% end %>
  </div>
-
-
-  
-  <div class = "form-design">
-  <%= form.label :num_of_tickets, "Num of Tickets:" %>
-  <%= form.text_field :num_of_tickets %>
-  </div>
-
-  <div class = "form-design">
-  <%= form.label :price, "Price:" %>
-  <%= form.text_field :price %>
-  </div>
-  
-
- <div class = "form-design">
-  <%= form.label :user_id, "user id:" %>
-  <%= form.text_field :user_id %>
-  </div>
-   <div class = "form-design">
-  <%= form.label :show_id, "show id:" %>
-  <%= form.text_field :show_id %>
-  </div>
-
-<div><%= form.submit "Submit"%></div>
 <% end %>
 
 

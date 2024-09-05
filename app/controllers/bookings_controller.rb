@@ -10,7 +10,9 @@ class BookingsController < ApplicationController
 
 
   def create
-    @booking = Booking.new(booking_params)
+    
+    @user = User.find(current_user.id)
+    @booking = @user.bookings.new(booking_params)
     if @booking.save
       redirect_to @booking, notice: "Booking was successfully created"
     else
@@ -19,10 +21,11 @@ class BookingsController < ApplicationController
   end
 
   def booking_history
-    @user = User.find(params[:id]
-    @bookings = @user.bookings
+    # @user = User.find(params[:id]
+    # @bookings = @user.bookings
+    @bookings = Booking.all
   end
-  
+
   def booking_params
     params.require(:booking).permit(:theatre, :showtime, :user_id, :show_id, :num_of_tickets, :price)
   end
