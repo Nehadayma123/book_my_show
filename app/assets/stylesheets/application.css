@@ -15,11 +15,11 @@
  */
  .main{
     background: rgb(239, 238, 238);
-    height: 90vh;
+    height: 150vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+     align-items: center; 
+    /* justify-content: center; */
     flex-direction: column;
     font-size: 20px;
-     padding: 15px;
-  }
+     padding: 15px; 
+  } 

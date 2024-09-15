@@ -1,0 +1,102 @@
+
+<%= stylesheet_link_tag "movies-index"%>
+
+<%= javascript_include_tag "js_logic" %>
+
+
+<p style="color: green"><%= notice %></p>
+
+
+<div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1725610192088_freeaccessweb.jpg" alt="Movie 1" style="height:35vh;">
+            </div>
+            <div class="slide">
+                <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1725348078113_webhsmthalapathyisthegoat.jpg" alt="Movie 2" style="height:35vh;">
+            </div>
+            <div class="slide">
+                <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1717082518448_playcardweb.jpg" alt="Movie 3" style="height:35vh;">
+            </div>
+        </div>
+        <button class="prev"></button>
+        <button class="next"></button>
+  </div>
+
+<div class="filter-and-movies">
+   <div class="filter">
+   <h3>Filter</h3><br>
+    <%= form_with url: admin_movies_path, method: :get, local: true do  %>
+    <% @languages = Movie.select(:language).distinct.pluck(:language) %>
+    <%= radio_button_tag :language, '', params[:language].blank? %>
+    <%= label_tag :language_all, 'All Languages' %> <br> 
+    <% @languages.each do |language| %>
+      <%= radio_button_tag :language, language, params[:language].to_s.downcase == language  %>
+      <%= label_tag :language, language.capitalize %>
+      <br>
+    <% end %>
+    <%= submit_tag 'Filter', style: 'margin-left: 60px; margin-top: 150px;' %>
+    <% end %>
+    </div>
+   <div class="movies-container">
+        <% @movies.each do |movie| %>
+        <div class="movie" >
+        <%= link_to image_tag(movie.image, class: 'image-style'), admin_movie_path(movie) %>
+        <%= movie.title%>
+        :<%= movie.description%>
+        <br>
+        <span style="color: gray;"><%= movie.language %></span>
+        </div>
+        <% end %>
+
+         <div class="pagination">
+         <% if @page > 1 %>
+         <%= link_to 'Previous', admin_movies_path(page: @page - 1, language: params[:language]) %>
+         <% end %>
+ 
+         <% if @page < @total_pages %>
+         <%= link_to 'Next', admin_movies_path(page: @page + 1, language: params[:language]) %>
+         <% end %>   
+         </div>
+   </div>
+  
+</div>
+
+
+
+
+<% if can? :manage, Movie %>
+  <%= link_to 'New Movie', new_admin_movie_path, class: 'btn btn-primary' %>
+<%end%>
+
+
+<script>
+let currentIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+function showSlide(index) {
+    if (index >= totalSlides) {
+        currentIndex = 0;
+    } else if (index < 0) {
+        currentIndex = totalSlides - 1;
+    } else {
+        currentIndex = index;
+    }
+
+    const newTransformValue = `-${currentIndex * 100}%`;
+    document.querySelector('.slider').style.transform = `translateX(${newTransformValue})`;
+}
+
+function nextSlide() {
+    showSlide(currentIndex + 1);
+}
+
+function prevSlide() {
+    showSlide(currentIndex - 1);
+}
+
+document.querySelector('.prev').addEventListener('click', prevSlide);
+document.querySelector('.next').addEventListener('click', nextSlide);
+setInterval(nextSlide, 3000);
+</script>

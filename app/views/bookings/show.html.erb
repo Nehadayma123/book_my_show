@@ -1,0 +1,8 @@
+
+<h3>Booking Confirmation</h3>
+<p>Movie: <%= @booking.show.movie.title %></p>
+<p>Theatre: <%= @booking.show.theatre.name %></p>
+<p>Showtime: <%= @booking.show.show_time.strftime("%I:%M %p") %></p>
+<p>Seats: <%= @booking.seats.map(&:seat_number).join(', ') %></p>
+<p>Number of Tickets: <%= @booking.num_of_tickets %></p>
+<p>Booking ID: <%= @booking.id %></p>

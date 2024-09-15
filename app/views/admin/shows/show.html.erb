@@ -1,0 +1,19 @@
+
+<%= stylesheet_link_tag "theatre_show"%>
+
+<p style="color: green"><%= notice %></p>
+<div class="show-data">
+  <% @show = Show.find(params[:id]) %>
+   <div class="space"> Show Date: <%= @show.show_time.strftime("%B %d, %Y")%> </div>
+
+  <div class="space"> Show Time: <%= @show.show_time.strftime(" %I:%M %p")%> </div>
+    
+   <div class="space">  Price: <%= @show.price%> </div>
+   <div class="space">  Available seats: <%= @show.available_seates%> </div>
+
+<div>
+   <div class="space">   <%=link_to "Edit this show", edit_admin_show_path(@show), class:'btn btn-primary' %> </div>
+   <div class="space">  <%= link_to "Back", admin_shows_path, class:'btn btn-primary' %> </div>
+   <div class="space">  <%= button_to "Destroy this show", admin_shows_path(@show), method: :delete , class:'btn btn-primary'%> </div>
+</div>
+</div>

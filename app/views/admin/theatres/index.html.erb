@@ -1,0 +1,38 @@
+
+<%= stylesheet_link_tag "threatre_index"%>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Theatres</h1>
+
+<table>
+ <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+    <tbody>
+       <% @theatres.each do |theatre| %>
+       <tr>
+        <td><%= theatre.name %></td>
+        <td><%= theatre.location%></td>
+        <td><%= link_to "Show", admin_theatre_path(theatre), class: 'btn btn-primary' %></td>
+        <td><%= link_to "Edit", edit_admin_theatre_path(theatre), class: 'btn btn-primary' %></td>
+        <td><%= button_to "Destroy", admin_theatre_path(theatre), method: :delete, class: 'btn btn-primary' %></td>
+      </tr>   
+        <% end %>
+  </tbody>
+<br>
+</table>
+
+
+<% if can? :manage, Theatre %>
+  <%= link_to 'New Theatre', new_admin_theatre_path, class: 'btn btn-primary' %>
+<% end %>
+
+
+
+
+

@@ -1,23 +1,27 @@
 Rails.application.routes.draw do
-  get 'bookings/index'
-  # get 'show/index'
-  # get 'show/edit'
-  # get 'show/show'
-  # get 'movies/index'
-  # get 'movies/show'
-  # get 'movies/new'
-  # get 'movies/edit'
-  # get 'theatres/index'
-  # get 'theatres/show'
-  # get 'theatres/new'
-  # get 'theatres/destroy'
-  
-  get 'bookings/booking_history'
-  resources :bookings
-  resources :shows
-  resources :theatres
   devise_for :users
-  resources :movies
+  post 'select_seat', to: 'bookings#select_seat', as: 'select_seat'
+  get 'finalize', to: 'bookings#finalize', as: 'final'
+
+  post 'bookings', to: 'bookings#create'
+
+  root to: 'admin/movies#index'
+  namespace :admin do
+    resources :movies do 
+       collection do
+          get 'search'
+       end
+    end
+    resources :shows do
+        collection do
+         get 'show_theatre'
+        end
+      end
+    resources :theatres   
+  end
+ 
+  resources :bookings, only: [:index, :new, :create, :show]
+  
   
   # root to: "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

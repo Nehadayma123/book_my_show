@@ -1,36 +1,31 @@
-<%= stylesheet_link_tag "threatre_index"%>
+<!-- app/views/bookings/index.html.erb -->
+<h1>Your Booking History</h1>
 
-<p style="color: green"><%= notice %></p>
-
-<h1>Movies</h1>
-
-<table>
- <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if @bookings.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Movie</th>
+        <th>Theatre</th>
+        <th>Showtime</th>
+        <th>Seats</th>
+        <th>Number of Tickets</th>
+        <th>Booking ID</th>
+      </tr>
+    </thead>
     <tbody>
-       <% @movies.each do |movie| %>
-       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.description%></td>
-        <td><%= link_to "Show", movie, class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Book tickets', new_booking_path, class: 'btn btn-primary' %></td>
-        </tr>   
-        <% end %>
-  </tbody>
-  <%= link_to 'View history',bookings_booking_history_path, class: 'btn btn-primary' %>
-
-<br>
-</table>
-
-
-
-
-
-
-
-
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.show.movie.title %></td>
+          <td><%= booking.show.theatre.name %></td>
+          <td><%= booking.show.show_time.strftime("%I:%M %p") %></td>
+          <td><%= booking.seats.map(&:number).join(', ') %></td>
+          <td><%= booking.num_of_tickets %></td>
+          <td><%= booking.id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You have no bookings yet.</p>
+<% end %>

@@ -1,0 +1,35 @@
+
+<%= stylesheet_link_tag "theatre_form"%>
+
+ <div class = form>
+ <%= form_with model: @movie, url: (action_name == 'edit' ? admin_movie_path(@movie) : admin_movies_path), method: (action_name == 'edit' ? :patch : :post) do |form| %>
+  <% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = "form-design">
+  <%= form.label :title, "Title:" %>
+  <%= form.text_field :title %>
+  </div>
+  <div class="form-design">
+  <%= form.label :description, "Description:" %>
+  <%= form.text_field :description %>
+  </div>
+  <div class="form-design">
+  <%= form.label :language, "Language:" %>
+  <%= form.text_field :language %>
+  </div>
+  <div class="form-design">
+  <%= form.label :image, "Image:" %>
+  <%= form.file_field :image %>
+  </div>
+   <div><%= form.submit "Submit"%></div>
+<% end %>
+</div>
