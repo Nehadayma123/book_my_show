@@ -11,6 +11,5 @@ class Booking < ApplicationRecord
       errors.add(:num_of_tickets, "cannot be more than available seats")
     end
   end
-
   validates :num_of_tickets, numericality: { greater_than: 0 }
 end

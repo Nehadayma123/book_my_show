@@ -1,16 +1,12 @@
-
 <%= stylesheet_link_tag "theatre_show"%>
-
 <p style="color: green"><%= notice %></p>
 <div class="show-data">
   <% @theatre = Theatre.find(params[:id]) %>
-  
-  <div class="space"> Name: <%= @theatre.name%> </div>
-    
-   <div class="space">   Price: <%= @theatre.location%> </div>
+  <div class="space"> Name: <%= @theatre.name%> </div>  
+  <div class="space">   Price: <%= @theatre.location%> </div>
 <div>
    <div class="space">   <%=link_to "Edit this theatre", edit_admin_theatre_path(@theatre), class:'btn btn-primary' %> </div>
    <div class="space">  <%= link_to "Back", admin_theatres_path, class:'btn btn-primary' %> </div>
-        <td><%= button_to "Destroy", admin_theatre_path(@theatre), method: :delete, class: 'btn btn-primary' %></td>
+   <%= button_to "Destroy", admin_theatre_path(@theatre), method: :delete, class: 'btn btn-primary' %>
 </div>
 </div>

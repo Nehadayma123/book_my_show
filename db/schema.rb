@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_13_065216) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_16_063224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,13 +78,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_13_065216) do
     t.string "language", null: false
   end
 
-  create_table "seats", force: :cascade do |t|
+  create_table "seats", id: :serial, force: :cascade do |t|
     t.bigint "show_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number", null: false
     t.boolean "available", null: false
-    t.index ["show_id"], name: "index_seats_on_show_id"
   end
 
   create_table "shows", force: :cascade do |t|

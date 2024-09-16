@@ -3,13 +3,10 @@ module Admin
 class MoviesController < ApplicationController
     before_action :authenticate_user!
     before_action :set_params_id, only: [:show, :edit, :update, :destroy]
-  
-      PER_PAGE = 8
-  
+    PER_PAGE = 8
       def index
         @page = params[:page].to_i > 0 ? params[:page].to_i : 1
         @total_movies = Movie.count
-    
         if params[:language].present?
           @movies = Movie.where('LOWER(language) = ?', params[:language].downcase)
                          .order(created_at: :desc)
@@ -21,7 +18,6 @@ class MoviesController < ApplicationController
                          .limit(PER_PAGE)
                          .offset((@page - 1) * PER_PAGE)
         end
-    
         @total_pages = (@total_movies / PER_PAGE.to_f).ceil
     end
     
@@ -78,6 +74,6 @@ class MoviesController < ApplicationController
     def movie_params
       params.require(:movie).permit(:id, :title, :description, :language, :image)
     end
+ end
 end
-  end
   

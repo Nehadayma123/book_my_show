@@ -26,7 +26,7 @@
                    <% if user_signed_in? %>
                   Logged in as <strong> <%= current_user.email %></strong> 
                   <%= link_to 'View movies',admin_movies_path, class: 'btn btn-primary' %>
-                    <% if can? :manage, Theatre %>
+                  <% if can? :manage, Theatre %>
                   <%= link_to 'View theatres',admin_theatres_path, class: 'btn btn-primary' %>
                    <%= link_to 'View shows', admin_shows_path, class: 'btn btn-primary' %>
                    <%end%>
@@ -36,7 +36,6 @@
                   <%= link_to "Edit Profile",edit_user_registration_path , :class => 'btn btn-primary' %> 
                   <%end%>
                   <%= button_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
-                 \
                   <% else  %>
                   <%= link_to "Sign Up", new_user_registration_path , :class => 'navbar_link' %> 
                   <%= link_to "Login ", new_user_session_path , :class => 'navbar_link' %> 
@@ -51,20 +50,12 @@
                   <span>Hi,Admin</span>
                   <%end%>
                    <% if cannot? :manage, Movie %>
-                  <span>Hi,Admin</span>
+                  <span>Hi,Guest</span>
                   <%end%>
             </div>
         </div>
-    </header>
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "300px";
-}
+</header>
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>
 
 
 

@@ -24,14 +24,17 @@ class BookingsController < ApplicationController
     @seats = (1..@total_seats).to_a 
     @booked_seats = Seat.where(show_id: @show.id, available: false).pluck(:number)
     @total_price =  @number_of_tickets * @show.price
-
   end
 
 
   def create
+    seat_ids  = params[:booking][:seat_ids]
+    seat_ids.each do |id|
+    Seat.create(show_id: params[:show_id], number: id, available: false)  
+    end
     @booking = Booking.new(booking_params)
     if @booking.save
-      Seat.where(id: booking_params[:seat_ids]).update_all(available: false)
+      UserMailer.booking_confirmation_email(@booking).deliver_now
       redirect_to @booking
     else
       render :select_seat
@@ -39,7 +42,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:num_of_tickets, :user_id, :show_id,  :showtime, :theatre, :price, seat_ids: [])
+    params.permit(:num_of_tickets, :user_id, :show_id, :price)
   end
 end
 

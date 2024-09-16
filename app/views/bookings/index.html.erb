@@ -1,26 +1,28 @@
-<!-- app/views/bookings/index.html.erb -->
+
 <h1>Your Booking History</h1>
 
 <% if @bookings.any? %>
   <table>
     <thead>
       <tr>
+        <th>Date</th>
         <th>Movie</th>
         <th>Theatre</th>
         <th>Showtime</th>
-        <th>Seats</th>
         <th>Number of Tickets</th>
+        <th>Price</th>
         <th>Booking ID</th>
       </tr>
     </thead>
     <tbody>
       <% @bookings.each do |booking| %>
         <tr>
+          <td><%= Time.zone.now.to_date.strftime('%Y-%m-%d') %></td>
           <td><%= booking.show.movie.title %></td>
           <td><%= booking.show.theatre.name %></td>
           <td><%= booking.show.show_time.strftime("%I:%M %p") %></td>
-          <td><%= booking.seats.map(&:number).join(', ') %></td>
           <td><%= booking.num_of_tickets %></td>
+          <td><%= booking.show.price * booking.num_of_tickets %></td>
           <td><%= booking.id %></td>
         </tr>
       <% end %>

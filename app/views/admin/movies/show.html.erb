@@ -13,7 +13,9 @@
    <div class="space"><%= link_to "Back", admin_movies_path, class:'btn btn-primary' %> </div>
    <div class="space"><%= button_to "Destroy this movie", admin_movie_path(@movie), method: :delete , class:'btn btn-primary'%> </div>
    <%end%>
+  <% if cannot? :manage, Movie %> 
    <div class="space"><%= link_to 'Book Tickets',  show_theatre_admin_shows_path(movie_id: @movie.id), class:'btn btn-primary'%> </div>
+   <%end%>
 </div>
 
 

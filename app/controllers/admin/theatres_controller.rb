@@ -1,5 +1,4 @@
 class Admin::TheatresController < ApplicationController
-    
     before_action :authenticate_user!
     before_action :set_params_id, only: [:show, :edit, :update, :destroy]
   

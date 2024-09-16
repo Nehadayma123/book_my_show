@@ -1,21 +1,21 @@
-
 <h1>Shows for <%= @movie.title %></h1>
-
-
 <h2>Available Shows for Today</h2>
+
 <% if @shows.empty? %>
   <p>No upcoming shows for today.</p>
 <% else %>
   <strong>Date:</strong> <%= Time.zone.now.to_date.strftime('%Y-%m-%d') %><br>
-  <% @theatre = Theatre.all %>
-  <ul>
-    <% @shows.each do |show| %>
-      <li>
-        <strong>Theatre:</strong> <%= show.theatre.name %>:<%= show.theatre.location %><br>
-        <strong>Showtime:</strong> <%= show.show_time.strftime('%H:%M') %><br>
-        <strong>Price:</strong> <%= number_to_currency(show.price) %><br>
-        <%= link_to 'Book Tickets', new_booking_path(movie_id: @movie.id, show_id: show.id) %>
-      </li>
-    <% end %>
-  </ul>
+  <% shows_by_theatre = @shows.group_by { |show| show.theatre } %>
+  <% shows_by_theatre.each do |theatre, shows| %>
+    <h3>Theatre: <%= theatre.name %>: <%= theatre.location %></h3>
+    <ul>
+      <% shows.each do |show| %>
+        <li>
+          <strong>Showtime:</strong> <%= show.show_time.strftime('%H:%M') %><br>
+          <strong>Price:</strong> <%= number_to_currency(show.price) %><br>
+          <%= link_to 'Book Tickets', new_booking_path(movie_id: @movie.id, show_id: show.id) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>

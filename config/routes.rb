@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'seats/create'
   devise_for :users
   post 'select_seat', to: 'bookings#select_seat', as: 'select_seat'
   get 'finalize', to: 'bookings#finalize', as: 'final'

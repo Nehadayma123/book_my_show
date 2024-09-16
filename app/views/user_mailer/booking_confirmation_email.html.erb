@@ -1,8 +1,14 @@
-
-<h3>Booking Confirmation</h3>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  
+   <h3>Booking Confirmation to book my show <%= @user.email %></h3>
 <p>Movie: <%= @booking.show.movie.title %></p>
 <p>Theatre: <%= @booking.show.theatre.name %></p>
 <p>Showtime: <%= @booking.show.show_time.strftime("%I:%M %p") %></p>
 <p>Number of Tickets: <%= @booking.num_of_tickets %></p>
 <p>Booking ID: <%= @booking.id %></p>
-<div class="space"><%= link_to "Back", admin_movies_path, class:'btn btn-primary' %> </div>
+</html>

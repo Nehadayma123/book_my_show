@@ -53,7 +53,7 @@ class Admin:: ShowsController < ApplicationController
       def destroy
         @show.booking.destroy_all
         @show.destroy!
-        redirect_to admin_shows_path, notice: "'Show and associated bookings were successfully deleted.'"
+        redirect_to admin_shows_path, notice: "Show and associated bookings were successfully deleted."
       end
     
       def set_params_id

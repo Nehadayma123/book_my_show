@@ -3,14 +3,11 @@
 
 <h1  style= "margin-bottom: 15px">Editing Theatres</h1>
 <%= render "form", theatre: @theatre %>
-
 <br>
-
 <div class = "first">
-  
   <%=  link_to "Show this theatre", admin_theatre_path(@theatre), class: 'btn btn-primary' %> 
-  </div>
-  <div class = "second">
+</div>
+<div class = "second">
   <%=  link_to "Back to theatres", admin_theatre_path, class: 'btn btn-primary'%>
 </div>
 
