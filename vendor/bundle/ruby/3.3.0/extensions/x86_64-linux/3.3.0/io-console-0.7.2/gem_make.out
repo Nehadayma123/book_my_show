@@ -1,0 +1,27 @@
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/io-console-0.7.2/ext/io/console
+/home/developer/.rbenv/versions/3.3.0/bin/ruby extconf.rb
+checking for rb_io_path()... yes
+checking for rb_io_descriptor()... yes
+checking for rb_io_get_write_io()... yes
+checking for rb_io_closed_p()... yes
+checking for rb_io_open_descriptor()... yes
+checking for termios.h... yes
+checking for cfmakeraw() in termios.h... yes
+checking for sys/ioctl.h... yes
+checking for HAVE_RUBY_FIBER_SCHEDULER_H... yes
+creating Makefile
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-w4kkxs sitelibdir\=./.gem.20240916-24464-w4kkxs clean
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-w4kkxs sitelibdir\=./.gem.20240916-24464-w4kkxs
+compiling console.c
+linking shared-object io/console.so
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-w4kkxs sitelibdir\=./.gem.20240916-24464-w4kkxs install
+/usr/bin/install -c -m 0755 console.so ./.gem.20240916-24464-w4kkxs/io
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/io-console-0.7.2/ext/io/console
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-w4kkxs sitelibdir\=./.gem.20240916-24464-w4kkxs clean

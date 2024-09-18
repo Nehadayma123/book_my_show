@@ -1,33 +1,69 @@
+<%= stylesheet_link_tag 'threatre_index' %>
+<%= stylesheet_link_tag 'pagination' %>
 
-<%= stylesheet_link_tag "threatre_index"%>
 <p style="color: green"><%= notice %></p>
 <h1>Theatres</h1>
 <table>
- <thead>
+  <thead>
     <tr>
       <th>Name</th>
       <th>Location</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-    <tbody>
-       <% @theatres.each do |theatre| %>
-       <tr>
+  <tbody>
+    <% @theatres.each do |theatre| %>
+      <tr>
         <td><%= theatre.name %></td>
-        <td><%= theatre.location%></td>
-        <td><%= link_to "Show", admin_theatre_path(theatre), class: 'btn btn-primary' %></td>
-        <td><%= link_to "Edit", edit_admin_theatre_path(theatre), class: 'btn btn-primary' %></td>
-        <td><%= button_to "Destroy", admin_theatre_path(theatre), method: :delete, class: 'btn btn-primary' %></td>
-      </tr>   
-        <% end %>
+        <td><%= theatre.location %></td>
+        <td>
+          <%=
+            link_to 'Show',
+                    admin_theatre_path(theatre),
+                    class: 'btn btn-primary'
+          %>
+        </td>
+        <td>
+          <%=
+            link_to 'Edit',
+                    edit_admin_theatre_path(theatre),
+                    class: 'btn btn-primary'
+          %>
+        </td>
+        <td>
+          <%=
+            button_to 'Destroy',
+                      admin_theatre_path(theatre),
+                      method: :delete,
+                      class: 'btn btn-primary'
+          %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
-<br>
+  <br />
 </table>
+
+<div class="pagination">
+  <% if @page > 1 %>
+    <%=
+      link_to 'Previous', admin_theatres_path(page: @page - 1), class: 'prev'
+    %>
+  <% end %>
+
+  <% (1..@total_pages).each do |page_number| %>
+    <%=
+      link_to page_number,
+              admin_theatres_path(page: page_number),
+              class: ('active' if page_number == @page)
+    %>
+  <% end %>
+
+  <% if @page < @total_pages %>
+    <%= link_to 'Next', admin_theatres_path(page: @page + 1), class: 'next' %>
+  <% end %>
+</div>
+
 <% if can? :manage, Theatre %>
   <%= link_to 'New Theatre', new_admin_theatre_path, class: 'btn btn-primary' %>
 <% end %>
-
-
-
-
-

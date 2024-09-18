@@ -1,0 +1,19 @@
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+/home/developer/.rbenv/versions/3.3.0/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-jouyfd sitelibdir\=./.gem.20240916-24464-jouyfd clean
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-jouyfd sitelibdir\=./.gem.20240916-24464-jouyfd
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-jouyfd sitelibdir\=./.gem.20240916-24464-jouyfd install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20240916-24464-jouyfd/debug
+
+current directory: /home/developer/Desktop/book_my_show_project/vendor/bundle/ruby/3.3.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240916-24464-jouyfd sitelibdir\=./.gem.20240916-24464-jouyfd clean

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
@@ -7,8 +6,9 @@ class Ability
     user ||= User.new
     if user.admin?
       can :manage, :all
-    else    
+    else
       can :read, Movie
+
       # Can :read, Show
       can :read, Booking
       can :manage, Booking, user_id: user.id

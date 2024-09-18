@@ -1,21 +1,108 @@
-<h1>Shows for <%= @movie.title %></h1>
-<h2>Available Shows for Today</h2>
+<style>
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #2c3e50;
+}
 
-<% if @shows.empty? %>
-  <p>No upcoming shows for today.</p>
+h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #2980b9;
+}
+
+h4 {
+    margin: 15px 0 5px;
+    color: #34495e;
+}
+
+form {
+    /* text-align: right; */
+    /* margin-right: 150px; */
+    margin-bottom: 30px;
+}
+
+select {
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.ul {
+    list-style: none;
+    padding: 0;
+}
+
+.li {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    color: #fff;
+    background-color: #27ae60;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 150px;
+    
+}
+</style>
+<h1>Shows for <%= "#{@movie.title}: #{@movie.description}" %></h1>
+
+<%= form_with url: show_theatre_admin_shows_path, method: :get, local: true do %>
+  <%= label_tag :date, 'Select a Date:' %>
+  <%= hidden_field_tag :movie_id, @movie.id %>
+
+  <%=
+    select_tag :date,
+               options_for_select(date_options, selected: params[:date]),
+               include_blank: false,
+              onchange: 'this.form.submit();'
+
+  %>
+<% end %>
+
+<h2>Available Shows</h2>
+
+<% if  @shows.empty? %>
+  <p>No shows available for the selected date.</p>
 <% else %>
-  <strong>Date:</strong> <%= Time.zone.now.to_date.strftime('%Y-%m-%d') %><br>
-  <% shows_by_theatre = @shows.group_by { |show| show.theatre } %>
-  <% shows_by_theatre.each do |theatre, shows| %>
-    <h3>Theatre: <%= theatre.name %>: <%= theatre.location %></h3>
-    <ul>
-      <% shows.each do |show| %>
-        <li>
-          <strong>Showtime:</strong> <%= show.show_time.strftime('%H:%M') %><br>
-          <strong>Price:</strong> <%= number_to_currency(show.price) %><br>
-          <%= link_to 'Book Tickets', new_booking_path(movie_id: @movie.id, show_id: show.id) %>
-        </li>
+  <% (0..7).each do |day_offset| %>
+    <% current_date = Time.zone.now.to_date + day_offset.days %>
+    <%
+      shows_for_day =
+        @shows.select { |show| show.show_time.to_date == current_date }
+    %>
+      <% shows_by_theatre = shows_for_day.group_by { |show| show.theatre } %>
+      <% shows_by_theatre.each do |theatre, shows| %>
+      
+        <h4>Theatre: <%= theatre.name %> - <%= theatre.location %></h4>
+       
+        
+        <ul class = "ul">
+          <% shows.each do |show| %>
+            <li class = "li">
+              <strong>Showtime:</strong> <%=
+                show.show_time.strftime('%H:%M')
+              %><br />
+              <strong>Price:</strong> <%=
+                number_to_currency(show.price)
+              %><br />
+              <%=
+                link_to 'Book Tickets',
+                        new_booking_path(movie_id: @movie.id, show_id: show.id), class: "a"
+              %>
+            </li>
+          
+        </ul>
+       
       <% end %>
-    </ul>
+    <% end %>
   <% end %>
 <% end %>

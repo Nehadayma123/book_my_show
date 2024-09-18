@@ -1,6 +1,7 @@
-
+<%= stylesheet_link_tag 'threatre_index' %>
+<%= stylesheet_link_tag 'pagination' %>
 <h1>Your Booking History</h1>
-
+<br>
 <% if @bookings.any? %>
   <table>
     <thead>
@@ -20,7 +21,7 @@
           <td><%= Time.zone.now.to_date.strftime('%Y-%m-%d') %></td>
           <td><%= booking.show.movie.title %></td>
           <td><%= booking.show.theatre.name %></td>
-          <td><%= booking.show.show_time.strftime("%I:%M %p") %></td>
+          <td><%= booking.show.show_time.strftime('%I:%M %p') %></td>
           <td><%= booking.num_of_tickets %></td>
           <td><%= booking.show.price * booking.num_of_tickets %></td>
           <td><%= booking.id %></td>
@@ -28,6 +29,26 @@
       <% end %>
     </tbody>
   </table>
+  <div class="pagination">
+  <% if @page > 1 %>
+    <%=
+      link_to 'Previous', bookings_path(page: @page - 1), class: 'prev'
+    %>
+  <% end %>
+
+  <% (1..@total_pages).each do |page_number| %>
+    <%=
+      link_to page_number,
+              bookings_path(page: page_number),
+              class: ('active' if page_number == @page)
+    %>
+  <% end %>
+
+  <% if @page < @total_pages %>
+    <%= link_to 'Next', bookings_path(page: @page + 1), class: 'next' %>
+  <% end %>
+</div>
+
 <% else %>
   <p>You have no bookings yet.</p>
 <% end %>

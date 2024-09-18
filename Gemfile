@@ -69,4 +69,7 @@ end
 gem "devise", "~> 4.9"
 
 gem "cancancan", "~> 3.6"
-gem 'rspec-rails', group: [:development, :test]
+gem "rspec-rails", group: [:development, :test]
+
+gem "rufo", "~> 0.18.0"
+gem "stripe"
