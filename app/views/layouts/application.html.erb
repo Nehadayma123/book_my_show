@@ -2,20 +2,21 @@
 <html>
   <head>
     <title>BookMyShowProject</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <script src="https://js.stripe.com/v3/"></script> 
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-   <%= render "header_footer/header" %>
-    <div class = "main">
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%= render 'header_footer/header' %>
+    <div class="main">
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
     </div>
-    <%= render "header_footer/footer" %>
+    <%= render 'header_footer/footer' %>
   </body>
 </html>

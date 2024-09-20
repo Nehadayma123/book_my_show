@@ -2,6 +2,22 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
   PER_PAGE = 15
   def index
+    seat = params[:seat]
+    seat.each do |id|
+      Seat.create(show_id: params[:show_id], number: id, available: false)
+    end
+    
+    @booking = Booking.create(num_of_tickets: params[:num_of_tickets],show_id: params[:show_id],  user_id: params[:user_id] ,price: params[:price])
+    
+    if @booking.save
+      UserMailer.booking_confirmation_email(@booking).deliver_now
+      redirect_to @booking
+    else
+      render :select_seat
+    end
+  end
+
+  def booking_history
     @page = params[:page].to_i > 0 ? params[:page].to_i : 1
     @total_bookings = current_user.bookings.count
     @bookings =
@@ -22,7 +38,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find(params[:id])
+     @booking = Booking.find(params[:id])
   end
 
   def select_seat
@@ -42,13 +58,16 @@ class BookingsController < ApplicationController
       Seat.create(show_id: params[:show_id], number: id, available: false)
     end
     @booking = Booking.new(booking_params)
+    
     if @booking.save
       UserMailer.booking_confirmation_email(@booking).deliver_now
-      redirect_to new_payment_path
+      redirect_to @booking
     else
       render :select_seat
     end
+
   end
+  
 
   def booking_params
     params.permit(:num_of_tickets, :user_id, :show_id, :price)

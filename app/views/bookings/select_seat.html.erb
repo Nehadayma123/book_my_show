@@ -1,39 +1,14 @@
-<style>
-  .seat-map {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    gap: 5px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .seat {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-  }
-  .seat.available {
-    background-color: green;
-    color: white;
-  }
-  .seat.booked {
-    background-color: red;
-    color: white;
-    cursor: not-allowed;
-  }
-</style>
+<%= stylesheet_link_tag 'select_seat' %>
 
 <h1>Select Your Seats</h1>
-<p>Showtime: <%= @show.show_time.strftime("%I:%M %p") %> - Theatre: <%= @show.theatre.name %></p>
+<p>
+  Showtime: <%= @show.show_time.strftime('%I:%M %p') %> - Theatre:
+  <%= @show.theatre.name %>
+</p>
 <p>Number of Tickets: <%= @number_of_tickets %></p>
 <p>Price: <%= @total_price %></p>
 
-<%= form_with model: @booking, url: bookings_path, method: :post do |form| %>
+<%= form_with model: @booking, url: checkouts_create_path,  method: :post, remote: true do |form| %>
   <%= hidden_field_tag :show_id, @show.id %>
   <%= hidden_field_tag :num_of_tickets, @number_of_tickets %>
   <%= hidden_field_tag :user_id, current_user.id %>
@@ -42,11 +17,17 @@
   <div class="seat-map">
     <% @seats.each do |seat_number| %>
       <div class="seat <%= seat_class(seat_number) %>">
-        <%= check_box_tag 'booking[seat_ids][]', seat_number, false, id: "seat_#{seat_number}", disabled: @booked_seats.include?(seat_number) %>
+        <%=
+          check_box_tag 'booking[seat_ids][]',
+                        seat_number,
+                        false,
+                        id: "seat_#{seat_number}",
+                        disabled: @booked_seats.include?(seat_number)
+        %>
         <%= label_tag "seat_#{seat_number}", seat_number %>
       </div>
     <% end %>
   </div>
 
-  <%= form.submit 'Confirm Seats' %>
+  <%= form.submit 'Payment' %>
 <% end %>

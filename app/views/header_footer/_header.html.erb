@@ -56,7 +56,7 @@
         <a href="#footer" class="btn btn-primary">Contact</a>
         <% if cannot? :manage, Theatre %>
           <%=
-            link_to 'Booking history', bookings_path, class: 'btn btn-primary'
+            link_to 'Booking history',  booking_history_bookings_path, class: 'btn btn-primary'
           %>
           <%=
             link_to 'Edit Profile',

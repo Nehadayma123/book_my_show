@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_15_121941) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_18_111610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,7 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_121941) do
     t.string "language", null: false
   end
 
-  create_table "seats", force: :cascade do |t|
+  create_table "seats", id: :serial, force: :cascade do |t|
     t.bigint "show_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,6 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_15_121941) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

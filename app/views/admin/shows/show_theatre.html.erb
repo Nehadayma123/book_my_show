@@ -92,7 +92,7 @@ select {
                 show.show_time.strftime('%H:%M')
               %><br />
               <strong>Price:</strong> <%=
-                number_to_currency(show.price)
+                show.price
               %><br />
               <%=
                 link_to 'Book Tickets',
