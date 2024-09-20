@@ -1,4 +1,5 @@
 class Show < ApplicationRecord
+  after_create :create_seats
   belongs_to :movie
   belongs_to :theatre
   has_many :booking, dependent: :destroy
@@ -18,10 +19,6 @@ class Show < ApplicationRecord
       errors.add('show time cannot be in the past time')
     end
   end
-
-  after_create :create_seats
-
-  private
 
   def create_seats
     (1..available_seates).each { |number| seats.create(number: number) }

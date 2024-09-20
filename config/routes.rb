@@ -20,8 +20,13 @@ Rails
       resources :theatres
     end
 
-    resources :bookings, only: %i[index new create show]
-    resources :payments
+    resources :bookings, only: %i[index new create show] do 
+      collection { get 'booking_history' }
+    end
+    post "checkouts/create", to: 'checkouts#create' 
+    post "checkouts/new", to: 'checkouts#new' 
+    # get 'bookings/generate', to: 'bookings#generate'
+   
 
     # root to: "home#index"
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

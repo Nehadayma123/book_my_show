@@ -13,4 +13,5 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user
   end
+  after_create { stripe_customer = Stripe::Customer.create(email: email) }
 end
