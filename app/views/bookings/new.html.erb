@@ -1,7 +1,17 @@
-<%= stylesheet_link_tag "new_theatre"%>
 
-<h1 style= "margin-bottom: 15px">Booking</h1>
-<%= render "form", booking: @booking %>
-<div>
-  <%= link_to "Back to booking", bookings_path, class: 'btn btn-primary' %>
-</div>
+<h1><%= @movie.title %></h1>
+<p>Showtime: <%= @show.show_time.strftime(" %I:%M %p") %> - Theatre: <%= @show.theatre.name %></p>
+<p>Price: <%= number_to_currency(@show.price) %></p>
+
+<%= form_with model: @booking, url: select_seat_path(movie_id: @movie.id, show_id: @show.id) do |form| %>
+   <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :movie_id, value: @movie.id %>
+  <%= form.hidden_field :show_id, value: @show.id %>
+  <div class="form-group">
+    <%= form.label :num_of_tickets, 'Number of Tickets' %>
+    <%= form.number_field :num_of_tickets, min: 1 , max: 10%>
+  </div>
+  <%= form.submit 'Proceed to Seat Selection' %>
+<% end %>
+
+ 

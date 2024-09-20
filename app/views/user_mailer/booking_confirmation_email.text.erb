@@ -1,0 +1,9 @@
+Welcome to example.com, <%= @user.email %>
+===============================================
+
+Booking Confirmation
+Movie: <%= @booking.show.movie.title %>
+Theatre: <%= @booking.show.theatre.name %>
+Showtime: <%= @booking.show.show_time.strftime("%I:%M %p") %>
+Number of Tickets: <%= @booking.num_of_tickets %>
+Booking ID: <%= @booking.id %>

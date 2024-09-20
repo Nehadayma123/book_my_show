@@ -1,0 +1,18 @@
+
+<%= stylesheet_link_tag "search"%>
+
+<h1>Search Results</h1>
+<% if @movies.any? %>
+  <ul>
+    
+    <% @movies.each do |movie| %>
+      <li>
+        <%= link_to image_tag(movie.image, style: "width:100px;"), admin_movie_path(movie) %><br>
+        <strong><%= movie.title %></strong><br>
+        <%= movie.description %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No movies found matching your search criteria.</p>
+<% end %>

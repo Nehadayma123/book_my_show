@@ -1,16 +1,18 @@
 # frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new
     if user.admin?
       can :manage, :all
     else
       can :read, Movie
-      Can :read, Show
+
+      # Can :read, Show
       can :read, Booking
       can :manage, Booking, user_id: user.id
+    end
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

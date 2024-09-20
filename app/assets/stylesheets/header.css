@@ -1,0 +1,132 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+.site-header {
+    color: black;
+    padding: 10px 0;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: white;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.site-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.site-nav ul li {
+    margin: 0 15px;
+}
+
+.site-nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.site-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.search-bar form {
+    display: flex;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    border: 1px solid gray;
+}
+
+.search-bar button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #ff5722;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-bar button:hover {
+    background-color: #e64a19;
+}
+.search-for{
+    width: 300px;
+    border-radius: 5px;
+    border: solid gray 1px;
+}
+.image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.select{
+    width: 10px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0; /* Position the drawer on the right */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  .sidenav a {
+    padding: 8px 32px 8px 8px; /* Adjust padding for right-side drawer */
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f49999;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px; /* Move the close button to the left side */
+    font-size: 36px;
+    margin-right: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

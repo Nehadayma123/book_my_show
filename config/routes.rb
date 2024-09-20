@@ -1,31 +1,35 @@
-Rails.application.routes.draw do
-  get 'bookings/index'
-  # get 'show/index'
-  # get 'show/edit'
-  # get 'show/show'
-  # get 'movies/index'
-  # get 'movies/show'
-  # get 'movies/new'
-  # get 'movies/edit'
-  # get 'theatres/index'
-  # get 'theatres/show'
-  # get 'theatres/new'
-  # get 'theatres/destroy'
-  
-  get 'bookings/booking_history'
-  resources :bookings
-  resources :shows
-  resources :theatres
-  devise_for :users
-  resources :movies
-  
-  # root to: "home#index"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+Rails
+  .application
+  .routes
+  .draw do
+    get 'seats/create'
+    devise_for :users
+    post 'select_seat', to: 'bookings#select_seat', as: 'select_seat'
+    get 'finalize', to: 'bookings#finalize', as: 'final'
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+    post 'bookings', to: 'bookings#create'
 
-  # Defines the root path route ("/")
-  # root "posts#index"
-end
+    root to: 'admin/movies#index'
+    namespace :admin do
+      resources :movies do
+        collection { get 'search' }
+      end
+      resources :shows do
+        collection { get 'show_theatre' }
+      end
+      resources :theatres
+    end
+
+    resources :bookings, only: %i[index new create show]
+    resources :payments
+
+    # root to: "home#index"
+    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+    # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+    # Can be used by load balancers and uptime monitors to verify that the app is live.
+    get 'up' => 'rails/health#show', :as => :rails_health_check
+
+    # Defines the root path route ("/")
+    # root "posts#index"
+  end

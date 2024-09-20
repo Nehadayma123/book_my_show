@@ -1,0 +1,46 @@
+<%= stylesheet_link_tag 'theatre_form' %>
+
+<div class="form">
+  <%= form_with model: @show, url: (action_name == 'edit' ? admin_show_path(@show) : admin_shows_path), method: (action_name == 'edit' ? :patch : :post) do |form| %>
+    <div class="form-design">
+      <%= form.label :movie_id, 'Movie' %>
+      <%=
+        form.collection_select :movie_id,
+                               Movie.all,
+                               :id,
+                               :title,
+                               prompt: 'Select a Movie'
+      %>
+    </div>
+
+   <div class="form-design">
+  <%= form.label :theatre_id, 'Theatre' %>
+  <%= form.select :theatre_id,
+                  options_for_select(
+                    Theatre.all.map { |theatre| [ "#{theatre.name} (#{theatre.location})", theatre.id ] },
+                    form.object.theatre_id
+                  ),
+                  { prompt: 'Select a Theatre' }
+  %>
+</div>
+
+
+    <div class="form-design">
+      <%= form.label :show_time, 'Show time:' %>
+      <%= form.datetime_local_field :show_time %>
+    </div>
+
+    <div class="form-design">
+      <%= form.label :price, 'Price :' %>
+      <%= form.text_field :price %>
+    </div>
+
+    <div class="form-design">
+      <%= form.label :available_seates, 'Available seats :' %>
+      <%= form.text_field :available_seates %>
+    </div>
+    <br /><br /><br /><br />
+    <div><%= form.submit 'Submit' %></div>
+  <% end %>
+  <br />
+</div>

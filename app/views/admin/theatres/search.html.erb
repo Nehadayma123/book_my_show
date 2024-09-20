@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag "search"%>
+<h1>Search Results</h1>
+<% if @theatres.any? %>
+  <ul>
+    <% @theatres.each do |theatre| %>
+      <li>
+        <strong>Name: <%= theatre.name %></strong><br>
+        location: <%= theatre.location  %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No movies found matching your search criteria.</p>
+<% end %>

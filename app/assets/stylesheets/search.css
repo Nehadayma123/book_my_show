@@ -1,0 +1,13 @@
+.movie {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .movie h2 {
+    color: #333;
+  }
+  
+  .movie p {
+    color: #666;
+  }

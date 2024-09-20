@@ -1,0 +1,7 @@
+
+<%= stylesheet_link_tag "new_theatre"%>
+<h1 style= "margin-bottom: 15px">New Theatre</h1>
+<%= render "form", theatre: @theatre %>
+<div>
+  <%= link_to "Back to threatre", admin_theatres_path, class: 'btn btn-primary' %>
+</div>

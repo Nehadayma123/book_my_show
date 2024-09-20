@@ -1,0 +1,101 @@
+<%= stylesheet_link_tag 'header' %>
+<%= javascript_importmap_tags 'js_logic' %>
+<header class="site-header">
+  <div class="container">
+    <div class="logo">
+      <%= image_tag('logo.png', { style: 'width:150px;height: 60px;' }) %>
+    </div>
+    <nav class="site-nav">
+      <ul>
+        <li>
+          <a><%= link_to 'Home', admin_movies_path %></a>
+        </li>
+        <li>
+          <a><%= link_to 'Movies', admin_movies_path %></a>
+        </li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <%= form_with url: admin_movies_path, method: :get, local: true do |form| %>
+        <%= form.search_field :title_search, class: 'search-for' %>
+        <%= form.submit 'Search', style: 'margin-left: 3px;' %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with url: admin_movies_path, method: :get, local: true, id: 'filter_form' do %>
+        <%= label_tag :location, '' %>
+        <%=
+          select_tag :location,
+                     options_for_select(@distinct_locations || []),
+                     include_blank: 'All Locations',
+                     onchange: 'this.form.submit();'
+        %>
+      <% end %>
+    </div>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <% if user_signed_in? %>
+        Logged in as <strong> <%= current_user.email %></strong>
+        <%=
+          link_to 'View movies', admin_movies_path, class: 'btn btn-primary'
+        %>
+        <% if can? :manage, Theatre %>
+          <%=
+            link_to 'View theatres',
+                    admin_theatres_path,
+                    class: 'btn btn-primary'
+          %>
+          <%=
+            link_to 'View shows', admin_shows_path, class: 'btn btn-primary'
+          %>
+        <%end%>
+        <a href="#footer" class="btn btn-primary">Contact</a>
+        <% if cannot? :manage, Theatre %>
+          <%=
+            link_to 'Booking history', bookings_path, class: 'btn btn-primary'
+          %>
+          <%=
+            link_to 'Edit Profile',
+                    edit_user_registration_path,
+                    class: 'btn btn-primary'
+          %>
+        <%end%>
+        <%=
+          button_to 'Log out',
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: 'btn btn-primary'
+        %>
+      <% else  %>
+        <%=
+          link_to 'Sign Up', new_user_registration_path, class: 'navbar_link'
+        %>
+        <%= link_to 'Login ', new_user_session_path, class: 'navbar_link' %>
+      <% end %>
+    </div>
+    <div class="image" onclick="openNav()">
+      <div>
+        <%= image_tag('user_logo.png', { style: 'width:50px;' }) %>
+      </div>
+      <% if can? :manage, Movie %>
+        <span>Hi,Admin</span>
+      <%end%>
+      <% if cannot? :manage, Movie %>
+        <span>Hi,Guest</span>
+      <%end%>
+    </div>
+  </div>
+</header>
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
